@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TouchWoodDoard:war">
+    <output-path>$PROJECT_DIR$/TouchWoodDoard/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>TouchWoodDoard</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="TouchWoodDoard-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="TouchWoodDoard:war exploded" />
+    </root>
+  </artifact>
+</component>
