@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kgc.mapper.WoodMapper" >
+  <resultMap id="BaseResultMap" type="cn.kgc.domain.Wood" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="unitprice" property="unitprice" jdbcType="DOUBLE" />
+    <result column="totalprices" property="totalprices" jdbcType="DOUBLE" />
+    <result column="purchaser" property="purchaser" jdbcType="VARCHAR" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="engineeringunit" property="engineeringunit" jdbcType="VARCHAR" />
+    <result column="deliveryaddress" property="deliveryaddress" jdbcType="VARCHAR" />
+    <result column="seller" property="seller" jdbcType="INTEGER" />
+    <result column="tradingstatus" property="tradingstatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, time, productid, quantity, unitprice, totalprices, purchaser, cellphone, engineeringunit, 
+    deliveryaddress, seller, tradingstatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kgc.domain.WoodExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wood
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wood
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wood
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.kgc.domain.Wood" >
+    insert into wood (id, time, productid, 
+      quantity, unitprice, totalprices, 
+      purchaser, cellphone, engineeringunit, 
+      deliveryaddress, seller, tradingstatus
+      )
+    values (#{id,jdbcType=INTEGER}, #{time,jdbcType=DATE}, #{productid,jdbcType=INTEGER}, 
+      #{quantity,jdbcType=INTEGER}, #{unitprice,jdbcType=DOUBLE}, #{totalprices,jdbcType=DOUBLE}, 
+      #{purchaser,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{engineeringunit,jdbcType=VARCHAR}, 
+      #{deliveryaddress,jdbcType=VARCHAR}, #{seller,jdbcType=INTEGER}, #{tradingstatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kgc.domain.Wood" >
+    insert into wood
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="unitprice != null" >
+        unitprice,
+      </if>
+      <if test="totalprices != null" >
+        totalprices,
+      </if>
+      <if test="purchaser != null" >
+        purchaser,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="engineeringunit != null" >
+        engineeringunit,
+      </if>
+      <if test="deliveryaddress != null" >
+        deliveryaddress,
+      </if>
+      <if test="seller != null" >
+        seller,
+      </if>
+      <if test="tradingstatus != null" >
+        tradingstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null" >
+        #{unitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalprices != null" >
+        #{totalprices,jdbcType=DOUBLE},
+      </if>
+      <if test="purchaser != null" >
+        #{purchaser,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="engineeringunit != null" >
+        #{engineeringunit,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryaddress != null" >
+        #{deliveryaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="tradingstatus != null" >
+        #{tradingstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.kgc.domain.Wood" >
+    update wood
+    <set >
+      <if test="time != null" >
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null" >
+        unitprice = #{unitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalprices != null" >
+        totalprices = #{totalprices,jdbcType=DOUBLE},
+      </if>
+      <if test="purchaser != null" >
+        purchaser = #{purchaser,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="engineeringunit != null" >
+        engineeringunit = #{engineeringunit,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryaddress != null" >
+        deliveryaddress = #{deliveryaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        seller = #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="tradingstatus != null" >
+        tradingstatus = #{tradingstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.kgc.domain.Wood" >
+    update wood
+    set time = #{time,jdbcType=DATE},
+      productid = #{productid,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      unitprice = #{unitprice,jdbcType=DOUBLE},
+      totalprices = #{totalprices,jdbcType=DOUBLE},
+      purchaser = #{purchaser,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      engineeringunit = #{engineeringunit,jdbcType=VARCHAR},
+      deliveryaddress = #{deliveryaddress,jdbcType=VARCHAR},
+      seller = #{seller,jdbcType=INTEGER},
+      tradingstatus = #{tradingstatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteMoreWood">
+    delete FROM `wood`  where id in
+    <foreach collection="array" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    <!--注意:array表示数组对象、list表示集合对象-->
+  </delete>
+</mapper>
